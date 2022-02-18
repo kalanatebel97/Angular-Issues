@@ -1,38 +1,84 @@
 <form [formGroup]="compsForm">
+  <!--Commencement Date-->
+  <label class="col-sm-4 col-form-label"
+    >Commencement<span class="fa fa-star required-field"></span>
+  </label>
 
-<!--Commencement Date-->
-  <label class="col-sm-4 col-form-label">Lease Commencement<span class="fa fa-star required-field"></span> </label>
+  <input
+    type="date"
+    class="form-control"
+    formControlName="leaseCommencement"
+    (input)="commencementEvent($event)"
+  />
 
-  <input type="date" class="form-control"  formControlName="leaseCommencement" (input)="commencementEvent($event)">
+  <div
+    *ngIf="
+      compsForm.controls['leaseCommencement'].hasError('required') &&
+      (compsForm.controls['leaseCommencement'].dirty ||
+        compsForm.controls['leaseCommencement'].touched)
+    "
+    class="error"
+    translate
+  >
+    Please select Commencement date.
+  </div>
 
-   <div *ngIf="compsForm.controls['leaseCommencement'].hasError('required') &&(compsForm.controls['leaseCommencement'].dirty ||compsForm.controls['leaseCommencement'].touched) "
-  class="error" translate>Please select Lease Commencement date. </div>
-    
- 
-<!--Expiration Date-->
-    <label class="col-sm-4 col-form-label">Lease Expiration<span class="fa fa-star required-field"></span> </label>
+  <!--Expiration Date-->
+  <label class="col-sm-4 col-form-label"
+    >Expiration<span class="fa fa-star required-field"></span>
+  </label>
 
-    <input type="date" class="form-control"  formControlName="leaseExpiration" (input)="expirationEvent($event)">
+  <input
+    type="date"
+    class="form-control"
+    formControlName="leaseExpiration"
+    (input)="expirationEvent($event)"
+  />
 
-    <div *ngIf="compsForm.controls['leaseExpiration'].hasError('required') &&(compsForm.controls['leaseExpiration'].dirty ||compsForm.controls['leaseExpiration'].touched) "
-    class="error" translate>Please select Lease Expiration date. </div>
+  <div
+    *ngIf="
+      compsForm.controls['leaseExpiration'].hasError('required') &&
+      (compsForm.controls['leaseExpiration'].dirty ||
+        compsForm.controls['leaseExpiration'].touched)
+    "
+    class="error"
+    translate
+  >
+    Please select Expiration date.
+  </div>
 
-<!--Term(The difference)-->
-    <br>
-    <label for="SQFT" class="col-sm-4 col-form-label">Term</label>
-    <input type="text" class="form-control" formControlName="term" [value]="noOfdays" readonly>
-    
-    <div *ngIf="compsForm.controls['term'].hasError('required')"
-    class="error" translate>Please select expiration date and commencement date. </div>
+  <!--Term(The difference)-->
+  <br />
+  <label for="SQFT" class="col-sm-4 col-form-label">Term</label>
+  <input
+    type="text"
+    class="form-control"
+    formControlName="term"
+    [value]="noOfdays"
+    readonly
+  />
 
-    <!--Footer-->
-    <div class="row">
+  <div
+    *ngIf="compsForm.controls['term'].hasError('required')"
+    class="error"
+    translate
+  >
+    Please select expiration date and commencement date.
+  </div>
+
+  <!--Footer-->
+  <div class="row">
     <div class="col-md-12">
-            
-        <button class="btn btn-secondary float-end ms-1"(click)="cancel()" >Cancel</button>
-        <button class="btn btn-primary float-end" [disabled]="!compsForm.valid" (click)="saveComp(compsForm.value)">Add</button>
-   
+      <button class="btn btn-secondary float-end ms-1" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        class="btn btn-primary float-end"
+        [disabled]="!compsForm.valid"
+        (click)="saveComp(compsForm.value)"
+      >
+        Add
+      </button>
     </div>
-</div>
-
+  </div>
 </form>
